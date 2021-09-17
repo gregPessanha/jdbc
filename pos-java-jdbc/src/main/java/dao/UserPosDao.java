@@ -17,9 +17,7 @@ public class UserPosDao { /* PERSISTÊNCIA */
 	private Connection connection;
 
 	public UserPosDao() {
-
 		connection = SingleConnection.getConnection();
-
 	}
 
 	public void salvar(Userposjava userposjava) { /* INSERT */
@@ -40,7 +38,6 @@ public class UserPosDao { /* PERSISTÊNCIA */
 			}
 			e.printStackTrace();
 		}
-
 	}
 
 	public void salvarTelefone(Telefone telefone) {
@@ -60,12 +57,10 @@ public class UserPosDao { /* PERSISTÊNCIA */
 			}
 			e.printStackTrace();
 		}
-
 	}
 
 	public void update(Userposjava userposjava) {
 		try {
-
 			String sql = ("update userposjava set nome = ? where id = " + userposjava.getId());
 			PreparedStatement update = connection.prepareStatement(sql);
 			update.setString(1, userposjava.getNome());
@@ -119,7 +114,6 @@ public class UserPosDao { /* PERSISTÊNCIA */
 			retorno.setEmail(resultado.getString("email"));
 		}
 		return retorno;
-
 	}
 
 	public List<BeanUserFone> listaUserFone(Long idUser) {
@@ -136,7 +130,7 @@ public class UserPosDao { /* PERSISTÊNCIA */
 
 			while (resultSet.next()) {
 				BeanUserFone beanUserFone = new BeanUserFone();
-				
+
 				beanUserFone.setEmail(resultSet.getString("email"));
 				beanUserFone.setNome(resultSet.getString("nome"));
 				beanUserFone.setNumero(resultSet.getString("numero"));
@@ -168,19 +162,19 @@ public class UserPosDao { /* PERSISTÊNCIA */
 
 	public void deleteFonesPorUsuarios(Long idUser) {
 		/* DELETE ON CASCADE */
-		
+
 		try {
 			String sqlFone = " delete from telefoneuser where usuariopessoa = " + idUser; /* DELETA PRIMEIRO O FILHO */
 			String sqlUser = "delete from userposjava where id = " + idUser; /* DELETA DEPOIS O PAI */
-			
+
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlFone);
 			preparedStatement.executeUpdate();
 			connection.commit();
-			
+
 			preparedStatement = connection.prepareStatement(sqlUser);
 			preparedStatement.executeUpdate();
 			connection.commit();
-			
+
 		} catch (SQLException e) {
 			try {
 				connection.rollback();
@@ -189,7 +183,5 @@ public class UserPosDao { /* PERSISTÊNCIA */
 			}
 			e.printStackTrace();
 		}
-		
-				
 	}
 }

@@ -38,5 +38,4 @@ public class Telefone {
 	public void setUsuario(long usuario) {
 		this.usuario = usuario;
 	}
-
 }

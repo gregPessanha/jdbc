@@ -71,7 +71,6 @@ public class TesteBancoJdbc {
 	@Test
 	public void initiDelete() {
 		try {
-
 			UserPosDao dao = new UserPosDao();
 			dao.delete(11L);
 		} catch (Exception e) {
@@ -102,11 +101,9 @@ public class TesteBancoJdbc {
 				System.out.println(beanUserFone.toString());
 				System.out.println("---------------------------------------");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 	
 	@Test
